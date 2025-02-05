@@ -4,49 +4,36 @@ import { TodoSearch } from './TodoSearch';
 import { TodoList } from './TodoList';
 import './App.css';
 import { TodoItem } from './TodoItem';
+import { CreateTodoButton } from './CreateTodoButton';
+import React from 'react';
+
+const defaultTodos = [
+  { text: 'item 1', completed: true },
+  { text: 'imte 2', completed: false },
+  { text: 'imte 3', completed: false },
+  { text: 'item 4', completed: false },
+];
 
 function App() {
   return (
-    <div className="App">
+    <React.Fragment>
+       {/* <div className="App"> */}
+      <TodoCounter completed={16} total={25} />
 
-      <TodoCounter />
       <TodoSearch />
-
       <TodoList>
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
+        {defaultTodos.map(todo => (
+          <TodoItem
+            key={todo.text} // Se usa `key` para ayudar a React a identificar cada elemento
+            text={todo.text}
+            completed={todo.completed}
+          />
+        ))}
       </TodoList>
 
-      {/* <CreateTodoButton /> */}
-      
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Estructura React 18
-        </p>
-        <a
-          className="App-link"
-          href="https://platzi.com/reactjs"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Proyect base
-        </a>
-      </header> */}
-    </div>
+      <CreateTodoButton />
+    </React.Fragment>
   );
 }
-
-
-/* function TodoItem() {
-  return (
-    <li>
-      <span>V</span>
-      <p>Llorar con la Llorona</p>
-      <span>X</span>
-    </li>
-  );
-} */
 
 export default App;
