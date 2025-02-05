@@ -18,22 +18,24 @@ function App() {
   return (
     <React.Fragment>
        {/* <div className="App"> */}
-      <TodoCounter completed={16} total={25} />
-
-      <TodoSearch />
-      <TodoList>
-        {defaultTodos.map(todo => (
-          <TodoItem
-            key={todo.text} // Se usa `key` para ayudar a React a identificar cada elemento
-            text={todo.text}
-            completed={todo.completed}
-          />
-        ))}
-      </TodoList>
-
-      <CreateTodoButton />
+       <div className="todo-container">
+        <TodoCounter completed={16} total={25} className="todo-counter" />
+        <TodoSearch className="todo-search" />
+        <TodoList className="todo-list">
+          {defaultTodos.map(todo => (
+            <TodoItem
+              key={todo.text}
+              text={todo.text}
+              completed={todo.completed}
+              className={`todo-item ${todo.completed ? "completed" : ""}`}
+            />
+          ))}
+        </TodoList>
+        <CreateTodoButton className="create-todo-button" />
+       </div>
     </React.Fragment>
   );
 }
 
 export default App;
+
