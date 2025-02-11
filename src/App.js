@@ -24,6 +24,14 @@ function App() {
   ).length;
   const totalTodos = todos.length;
 
+  const searchedTodos = todos.filter(
+    (todo) => {
+      const todoText = todo.text.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+      return todoText.includes(searchText);
+    }
+  );
+
   console.log('Los usuarios buscan todos de ' + searchValue);
 
   return (
@@ -42,7 +50,7 @@ function App() {
           setSearchValue={setSearchValue}
           className="todo-search"
         />
-        <TodoList className="todo-list">
+        {/* <TodoList className="todo-list">
           {defaultTodos.map(todo => (
             <TodoItem
               key={todo.text}
@@ -51,7 +59,17 @@ function App() {
               className={`todo-item ${todo.completed ? "completed" : ""}`}
             />
           ))}
-        </TodoList>
+        </TodoList> */}
+        <TodoList>
+        {searchedTodos.map(todo => (
+          <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+            className={`todo-item ${todo.completed ? "completed" : ""}`}
+          />
+        ))}
+      </TodoList>
         <CreateTodoButton className="create-todo-button" />
        </div>
     </>
