@@ -1,26 +1,47 @@
 // import logo from './react.png';
+import React from 'react';
 import { TodoCounter } from './TodoCounter';
 import { TodoSearch } from './TodoSearch';
 import { TodoList } from './TodoList';
 import './App.css';
 import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CreateTodoButton';
-import React from 'react';
 
 const defaultTodos = [
   { text: 'item 1', completed: true },
   { text: 'imte 2', completed: false },
   { text: 'imte 3', completed: false },
   { text: 'item 4', completed: false },
+  { text: 'item 5', completed: true },
 ];
 
 function App() {
+  const [todos, setTodos] = React.useState(defaultTodos);
+  const [searchValue, setSearchValue] = React.useState('');
+
+  const completedTodos = todos.filter(
+    todo => !!todo.completed
+  ).length;
+  const totalTodos = todos.length;
+
+  console.log('Los usuarios buscan todos de ' + searchValue);
+
   return (
-    <React.Fragment>
+    <>
        {/* <div className="App"> */}
        <div className="todo-container">
-        <TodoCounter completed={16} total={25} className="todo-counter" />
-        <TodoSearch className="todo-search" />
+        {/* <TodoCounter completed={16} total={25} className="todo-counter" /> */}
+        <TodoCounter
+          completed={completedTodos}
+          total={totalTodos} 
+          className="todo-counter"
+      />
+        {/* <TodoSearch className="todo-search" /> */}
+        <TodoSearch
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          className="todo-search"
+        />
         <TodoList className="todo-list">
           {defaultTodos.map(todo => (
             <TodoItem
@@ -33,7 +54,7 @@ function App() {
         </TodoList>
         <CreateTodoButton className="create-todo-button" />
        </div>
-    </React.Fragment>
+    </>
   );
 }
 
